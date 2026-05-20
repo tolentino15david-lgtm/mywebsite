@@ -369,29 +369,61 @@ function closeModal(){
 document.getElementById('contactModal').addEventListener('click',function(e){
   if(e.target===this) closeModal();
 });
+
+// ITO ANG BAGONG FUNCTION NA MAGPAPAKULANG NG MESSAGE SA EMAIL MO
 function sendMessage(){
-  const name=document.getElementById('clientName').value.trim();
-  const email=document.getElementById('clientEmail').value.trim();
-  const subject=document.getElementById('clientSubject').value.trim();
-  const message=document.getElementById('clientMessage').value.trim();
-  if(!name||!email||!message){
+  const name = document.getElementById('clientName').value.trim();
+  const email = document.getElementById('clientEmail').value.trim();
+  const subject = document.getElementById('clientSubject').value.trim();
+  const message = document.getElementById('clientMessage').value.trim();
+  
+  if(!name || !email || !message){
     alert('Please fill in your name, email, and message.');
     return;
   }
-  const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!emailRegex.test(email)){
     alert('Please enter a valid email address.');
     return;
   }
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true;
-  btn.textContent='Sending...';
-  const mailtoLink=`mailto:vashanntolentino@gmail.com?subject=${encodeURIComponent(subject||'Portfolio Inquiry from '+name)}&body=${encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+message)}`;
-  window.location.href=mailtoLink;
-  setTimeout(function(){
-    document.getElementById('formState').style.display='none';
-    document.getElementById('successState').style.display='block';
-  },1200);
+  
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  // !!! IMPORTANT: PALITAN MO ITONG LINK SA IBABA NG FORM LINK MULA SA FORMSPREE ACCT MO !!!
+  const formspreeEndpoint = "https://formspree.io/f/PALITAN_MO_ITO_NG_ID_MO";
+
+  // Magpapadala ng data sa Formspree gamit ang Fetch API para walang pop-up apps
+  fetch(formspreeEndpoint, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      subject: subject || "Portfolio Inquiry",
+      message: message
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      // Kapag pumasok, automatic magpapakita ang Success State sa screen
+      document.getElementById('formState').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    } else {
+      alert('Oops! Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+    }
+  })
+  .catch(error => {
+    alert('Oops! Connection error. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+  });
 }
 </script>
 </body>
