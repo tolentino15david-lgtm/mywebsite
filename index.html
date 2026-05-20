@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* NAGDAGDAG NG SMOOTH SCROLL BEHAVIOR DITO */
+html {
+  scroll-behavior: smooth;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:#0a0a08;color:#f5f0e8;overflow-x:hidden;}
 :root{--gold:#c9a84c;--gold-light:#e8c96a;--gold-pale:#f5e6c0;--black:#0a0a08;--white:#f5f0e8;--gray:#6b6760;--surface:#111110;--surface2:#181816;}
@@ -165,8 +169,8 @@ footer p{font-size:0.7rem;color:rgba(107,103,96,0.6);}
 <nav>
   <div class="nav-logo">Shann <span>Tolentino</span></div>
   <ul class="nav-links">
-    <li><a href="#">Work</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="#work-section">Work</a></li>
+    <li><a href="#about-section">About</a></li>
     <li><a href="#" onclick="openModal();return false;">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="openModal()">Let's Talk</button>
@@ -215,7 +219,7 @@ footer p{font-size:0.7rem;color:rgba(107,103,96,0.6);}
   </div>
 </div>
 
-<section class="section">
+<section class="section" id="work-section">
   <div class="sec-eyebrow"><span class="sec-label">Selected Work</span></div>
   <h2 class="sec-heading">Projects &amp; <span>Clients</span></h2>
   <div class="projects-grid">
@@ -277,7 +281,7 @@ footer p{font-size:0.7rem;color:rgba(107,103,96,0.6);}
   </div>
 </section>
 
-<section class="section" style="background:var(--surface);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);">
+<section class="section" id="about-section" style="background:var(--surface);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);">
   <div class="sec-eyebrow"><span class="sec-label">About Me</span></div>
   <h2 class="sec-heading">Passionate. Driven. <span>Always learning.</span></h2>
   <div class="about-wrap">
